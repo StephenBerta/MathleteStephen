@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="appName">Mathlete</string>
+    <string name="action_settings">Settings</string>
+    <string name="buttonStartAddition">Addition</string>
+    <string name="buttonStartSubtraction">Subtraction</string>
+    <string name="buttonStartMultiplication">Multiplication</string>
+    <string name="buttonStartDivision">Division</string>
+    <string name="button_one">1</string>
+    <string name="title_activity_display_ran">DisplayRan</string>
+
+</resources>
