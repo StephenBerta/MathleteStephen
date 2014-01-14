@@ -34,7 +34,7 @@ public class KeypadAdapter extends BaseAdapter {
 	  Button btn;
 	  if (convertView == null) { // if it's not recycled, initialize some attributes
 	    btn = new Button(mContext);
-	    btn.setTextSize(50);
+	    btn.setTextSize(25);
 	    KeypadValue keypadButton = mButtons[position];
 		btn.setOnClickListener(mOnButtonClick);
 		 btn.setBackgroundResource(R.drawable.keypadstyle1);
@@ -55,6 +55,6 @@ public class KeypadAdapter extends BaseAdapter {
 	private KeypadValue[] mButtons = { KeypadValue.ONE, KeypadValue.TWO, KeypadValue.THREE, 
 									   KeypadValue.FOUR, KeypadValue.FIVE, KeypadValue.SIX, 
 									   KeypadValue.SEVEN, KeypadValue.EIGHT, KeypadValue.NINE,
-									   KeypadValue.CLR, KeypadValue.ZERO, KeypadValue.CLR};
+									   KeypadValue.CLR, KeypadValue.ZERO, KeypadValue.BCK};
 	
 }

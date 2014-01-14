@@ -85,9 +85,14 @@ public class DisplayRan extends Activity {
 		String answerCorrect = null;
 		
 		switch(keypadValue) {
-		case CLR:
-			userInputText.setText("0");
+		case BCK:
+			userInputText.setText("");
 			break;
+			
+		case CLR:
+			userInputText.setText("");
+			break;
+			
 		default:
 				if(Character.isDigit(text.charAt(0))) {
 					if(currentInput.equals("0")) {

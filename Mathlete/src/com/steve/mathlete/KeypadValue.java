@@ -11,7 +11,8 @@ public enum KeypadValue {
 	, SEVEN("7",KeypadValueCategory.Number)
 	, EIGHT("8",KeypadValueCategory.Number)
 	, NINE("9",KeypadValueCategory.Number)
-	, CLR("CLEAR", KeypadValueCategory.Clear);
+	, CLR("CLEAR", KeypadValueCategory.Clear)
+	, BCK("<--", KeypadValueCategory.Misc);
 	
 	 CharSequence mText; // Display Text
 	 KeypadValueCategory mCategory;
