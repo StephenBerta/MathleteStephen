@@ -33,7 +33,7 @@
 	        android:layout_below="@+id/welcomeText"
 	        android:layout_marginTop="25dp"
 	        android:gravity="center"
-	        android:onClick="ranSelect"
+	        android:onClick="runAddition"
 	        android:text="@string/buttonStartAddition" />
 	    
 	    <Button
@@ -44,7 +44,7 @@
 	        android:layout_below="@+id/additionButton"
 	        android:layout_marginTop="25dp"
 	        android:gravity="center"
-	        android:onClick="ranSelect"
+	        android:onClick="runSubtraction"
 	        android:text="@string/buttonStartSubtraction" />
 	    
 	    </RelativeLayout>
