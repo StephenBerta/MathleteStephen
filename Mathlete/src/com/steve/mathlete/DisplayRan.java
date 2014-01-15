@@ -133,12 +133,20 @@ public class DisplayRan extends Activity {
 		TextView userInputText = (TextView) findViewById(R.id.userAnswer);
 		String currentInput = userInputText.getText().toString();
 		
-//		int inputLength = currentInput.length();
+		int inputLength = currentInput.length();
+//		String memoryArray[] = null;
 //		String answerCorrect = null;
 		
 		switch(keypadValue) {
 		case BCK:
-			userInputText.setText("");
+			int endIndex = inputLength - 1;
+			
+			if(endIndex > 1) {
+				userInputText.setText("0");
+			} else {
+				userInputText.setText(currentInput.subSequence(0, endIndex));
+			}
+			
 			break;
 			
 		case CLR:
