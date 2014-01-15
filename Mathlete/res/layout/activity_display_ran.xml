@@ -66,4 +66,15 @@
     android:textStyle="bold" 
     />
 
+<TextView
+    android:id="@+id/timerDisplay"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignRight="@+id/grdButtons"
+    android:layout_alignTop="@+id/displayHere"
+    android:gravity="left"
+    android:textColor="@color/Red"
+    android:textSize="40sp"
+    android:textStyle="bold" />
+
 </RelativeLayout>
