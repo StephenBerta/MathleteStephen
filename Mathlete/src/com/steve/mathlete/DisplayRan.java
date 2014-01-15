@@ -5,9 +5,9 @@ import java.util.Random;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
@@ -28,7 +28,7 @@ public class DisplayRan extends Activity {
 	int answerSet[] = null;
 	CharSequence firstText = "0";
 	CharSequence value = null; 
-	
+	int timerTime = 0;
 	
 	@SuppressLint("NewApi")
 	@Override
@@ -95,6 +95,7 @@ public class DisplayRan extends Activity {
 	
 	public void run() {
 		answerSet = ranSelect();
+//		Sync sync = new Sync(timer, 1000);
 		String operator = "0";
 		if(MainActivity.isAddition) {
 			operator = "+";
@@ -141,7 +142,7 @@ public class DisplayRan extends Activity {
 		case BCK:
 			int endIndex = inputLength - 1;
 			
-			if(endIndex > 1) {
+			if(endIndex < 1) {
 				userInputText.setText("0");
 			} else {
 				userInputText.setText(currentInput.subSequence(0, endIndex));
@@ -241,4 +242,5 @@ public void checkCorrect() {
 	return;
 	}
 	
+
 }
