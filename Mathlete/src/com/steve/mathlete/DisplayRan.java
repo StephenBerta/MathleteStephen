@@ -7,7 +7,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
@@ -28,7 +27,7 @@ public class DisplayRan extends Activity {
 	int answerSet[] = null;
 	CharSequence firstText = "0";
 	CharSequence value = null; 
-	int timerTime = 0;
+	static int timerTime = 30;
 	
 	@SuppressLint("NewApi")
 	@Override
@@ -94,9 +93,22 @@ public class DisplayRan extends Activity {
 	}
 	
 	public void run() {
-		answerSet = ranSelect();
-//		Sync sync = new Sync(timer, 1000);
 		String operator = "0";
+		answerSet = ranSelect();
+		String number = "0";
+//		long timerInterval = 1000;
+//		final Runnable timer = new Runnable() {
+//			public void run() {
+//				timerTime -= 1;
+//				TextView timerView = (TextView) findViewById(R.id.timerDisplay);
+//				timerView.setText(timerTime);
+//			}
+//		};
+//
+//		Sync sync = new Sync(timer, timerInterval);
+		
+		
+		
 		if(MainActivity.isAddition) {
 			operator = "+";
 		}
@@ -109,8 +121,12 @@ public class DisplayRan extends Activity {
 			}
 			
 		}
-		String number = answerSet[1] + operator + answerSet[2];
-		
+		if(numberCorrect < 10) {
+			number = answerSet[1] + operator + answerSet[2];
+		}
+		if(numberCorrect > 10) {
+			number = answerSet[1] + operator + answerSet[2] + operator + answerSet[3];
+		}
 		
 		
 		final TextView displayNumbers = (TextView) findViewById(R.id.displayHere);
@@ -195,20 +211,28 @@ public int[] ranSelect() {
     	Random rand = new Random();
         Integer min = 0;
         Integer max = 10;
-        int randomNum1 = 1;
+        int randomNum1 = 0;
         int randomNum2 = 0;
+        int randomNum3 = 0;
         int numAnswer[] = new int[10];
         
      
         
         randomNum1 = rand.nextInt((max - min) + 1) + min;
         randomNum2 = rand.nextInt((max - min) + 1) + min;
+        randomNum3 = rand.nextInt((max - min) + 1) + min;
         numAnswer[1] = randomNum1;
         numAnswer[2] = randomNum2;
+        numAnswer[3] = randomNum2;
         //addition answer
+        if(numberCorrect < 10){
         numAnswer[5] = randomNum1 + randomNum2;
+        }
+        if(numberCorrect >= 10){
+        numAnswer[5] = randomNum1 + randomNum2 + randomNum3;
+        }
         //subtraction answer
-        numAnswer[6] = randomNum1 - randomNum2;
+        numAnswer[7] = randomNum1 - randomNum2;
         //multiplication answer
         //division answer
 
@@ -241,6 +265,7 @@ public void checkCorrect() {
 		}
 	return;
 	}
+	
 	
 
 }
