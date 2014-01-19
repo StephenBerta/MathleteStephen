@@ -20,10 +20,10 @@ import android.widget.Toast;
 
 
 public class DisplayRan extends Activity {
-	int numberCorrect = 0;
+	public static int numberCorrect = 0;
 	boolean isFirst = true;
 	boolean isCorrect = false;
-	//numbers to pass and get a return of the ranselect
+	public static int answerChangeFlag[] = {0, 5, 10};
 	int answerSet[] = null;
 	CharSequence firstText = "0";
 	CharSequence value = null; 
@@ -121,10 +121,10 @@ public class DisplayRan extends Activity {
 			}
 			
 		}
-		if(numberCorrect < 10) {
+		if(numberCorrect < answerChangeFlag[1]) {
 			number = answerSet[1] + operator + answerSet[2];
 		}
-		if(numberCorrect >= 10) {
+		if(numberCorrect >= answerChangeFlag[1]) {
 			number = answerSet[1] + operator + answerSet[2] + operator + answerSet[3];
 		}
 		
@@ -221,17 +221,17 @@ public int[] ranSelect() {
         numAnswer[3] = rand.nextInt((max - min) + 1) + min;
         
         //addition answer
-        if(numberCorrect < 10){
+        if(numberCorrect < answerChangeFlag[1]){
         numAnswer[5] = numAnswer[1] + numAnswer[2];
         }
-        if(numberCorrect >= 10){
+        if(numberCorrect >= answerChangeFlag[1]){
         numAnswer[5] = numAnswer[1] + numAnswer[2] + numAnswer[3];
         }
         //subtraction answer
-        if(numberCorrect < 10) {
+        if(numberCorrect < answerChangeFlag[1]) {
         numAnswer[6] = numAnswer[1] - numAnswer[2];
         }
-        if(numberCorrect >= 10) {
+        if(numberCorrect >= answerChangeFlag[1]) {
         numAnswer[6] = numAnswer[1] - numAnswer[2] - numAnswer[3];
             }
         //multiplication answer

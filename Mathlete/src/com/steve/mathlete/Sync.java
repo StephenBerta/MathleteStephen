@@ -7,6 +7,7 @@ public class Sync {
 	static private Handler handler = new Handler();
 	Runnable task;
 	
+	
 	public Sync(Runnable task, long time) {
 			this.task = task;
 			handler.removeCallbacks(task);

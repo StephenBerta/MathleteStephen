@@ -1,11 +1,14 @@
 package com.steve.mathlete;
 
+import android.content.Context;
+import android.view.View;
 import android.view.View.OnClickListener;
-import android.content.*;
-import android.view.*;
-import android.widget.*;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.Button;
 
 public class KeypadAdapter extends BaseAdapter {
+	public static String buttonTextColor;
 	private Context mContext;
 	private OnClickListener mOnButtonClick;
 	
@@ -37,8 +40,12 @@ public class KeypadAdapter extends BaseAdapter {
 	    btn.setTextSize(25);
 	    KeypadValue keypadButton = mButtons[position];
 		btn.setOnClickListener(mOnButtonClick);
-		 btn.setBackgroundResource(R.drawable.keypadstyle1);
-		
+		if(DisplayRan.numberCorrect < DisplayRan.answerChangeFlag[1]){
+			btn.setBackgroundResource(R.drawable.keypadstyle1);
+		}
+		if(DisplayRan.numberCorrect == DisplayRan.answerChangeFlag[1]){
+			btn.setBackgroundResource(R.drawable.keypadstyle2);
+		}
 	    // Set CalculatorButton enumeration as tag of the button so that we
 	    // will use this information from our main view to identify what to do
 	    btn.setTag(keypadButton);
