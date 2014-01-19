@@ -169,16 +169,17 @@ public final class R {
         public static final int keypadstyle1=0x7f020001;
     }
     public static final class id {
-        public static final int action_settings=0x7f090009;
-        public static final int additionButton=0x7f090007;
+        public static final int action_settings=0x7f09000a;
+        public static final int additionButton=0x7f090008;
         public static final int displayHere=0x7f090001;
         public static final int displayScreen=0x7f090000;
         public static final int grdButtons=0x7f090003;
         public static final int numberCorrect=0x7f090004;
-        public static final int subtractionButton=0x7f090008;
+        public static final int subtractionButton=0x7f090009;
         public static final int timerDisplay=0x7f090005;
         public static final int userAnswer=0x7f090002;
         public static final int welcomeText=0x7f090006;
+        public static final int welcomeText2=0x7f090007;
     }
     public static final class layout {
         public static final int activity_display_ran=0x7f030000;
@@ -197,6 +198,7 @@ public final class R {
         public static final int buttonStartSubtraction=0x7f060003;
         public static final int button_one=0x7f060006;
         public static final int title_activity_display_ran=0x7f060007;
+        public static final int welcome_title=0x7f060008;
     }
     public static final class style {
         /** 

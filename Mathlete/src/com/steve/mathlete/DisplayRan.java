@@ -82,7 +82,7 @@ public class DisplayRan extends Activity {
          }
          
 	}
-
+	
 	
 	 
 	@Override
@@ -124,7 +124,7 @@ public class DisplayRan extends Activity {
 		if(numberCorrect < 10) {
 			number = answerSet[1] + operator + answerSet[2];
 		}
-		if(numberCorrect > 10) {
+		if(numberCorrect >= 10) {
 			number = answerSet[1] + operator + answerSet[2] + operator + answerSet[3];
 		}
 		
@@ -211,28 +211,29 @@ public int[] ranSelect() {
     	Random rand = new Random();
         Integer min = 0;
         Integer max = 10;
-        int randomNum1 = 0;
-        int randomNum2 = 0;
-        int randomNum3 = 0;
+        
         int numAnswer[] = new int[10];
         
      
         
-        randomNum1 = rand.nextInt((max - min) + 1) + min;
-        randomNum2 = rand.nextInt((max - min) + 1) + min;
-        randomNum3 = rand.nextInt((max - min) + 1) + min;
-        numAnswer[1] = randomNum1;
-        numAnswer[2] = randomNum2;
-        numAnswer[3] = randomNum2;
+        numAnswer[1] = rand.nextInt((max - min) + 1) + min;
+        numAnswer[2] = rand.nextInt((max - min) + 1) + min;
+        numAnswer[3] = rand.nextInt((max - min) + 1) + min;
+        
         //addition answer
         if(numberCorrect < 10){
-        numAnswer[5] = randomNum1 + randomNum2;
+        numAnswer[5] = numAnswer[1] + numAnswer[2];
         }
         if(numberCorrect >= 10){
-        numAnswer[5] = randomNum1 + randomNum2 + randomNum3;
+        numAnswer[5] = numAnswer[1] + numAnswer[2] + numAnswer[3];
         }
         //subtraction answer
-        numAnswer[7] = randomNum1 - randomNum2;
+        if(numberCorrect < 10) {
+        numAnswer[6] = numAnswer[1] - numAnswer[2];
+        }
+        if(numberCorrect >= 10) {
+        numAnswer[6] = numAnswer[1] - numAnswer[2] - numAnswer[3];
+            }
         //multiplication answer
         //division answer
 
@@ -261,6 +262,11 @@ public void checkCorrect() {
 			TextView userInputText = (TextView) findViewById(R.id.userAnswer);
 			userInputText.setText("");
 	
+			} else {
+				Toast correctToast = Toast.makeText(getApplicationContext(), "correct answer is = " + answerSet[5], Toast.LENGTH_SHORT);
+				correctToast.setGravity(Gravity.CENTER_HORIZONTAL, 0 ,0);
+				correctToast.show();
+				
 			}
 		}
 	return;
