@@ -10,5 +10,11 @@
     <string name="button_one">1</string>
     <string name="title_activity_display_ran">DisplayRan</string>
     <string name="welcome_title">Welcome to</string>
+    <string name="game_over">Game Over!</string>
+    <string name="game_over_score">Score = </string>
+    <string name="title_activity_game_over_screen">GameOverScreen</string>
+    <string name="buttonGameOverRestart">Restart</string>
+    <string name="buttonGameOverHomeRestart">Main Menu</string>
+    
 
 </resources>

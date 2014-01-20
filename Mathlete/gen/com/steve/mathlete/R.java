@@ -171,35 +171,46 @@ public final class R {
         public static final int keypadstyle2=0x7f020003;
     }
     public static final class id {
-        public static final int action_settings=0x7f09000a;
-        public static final int additionButton=0x7f090008;
+        public static final int action_settings=0x7f09000e;
+        public static final int additionButton=0x7f09000c;
         public static final int displayHere=0x7f090001;
         public static final int displayScreen=0x7f090000;
+        public static final int gameOverScoreView=0x7f090007;
+        public static final int gameOverView=0x7f090006;
         public static final int grdButtons=0x7f090003;
         public static final int numberCorrect=0x7f090004;
-        public static final int subtractionButton=0x7f090009;
+        public static final int restartButton=0x7f090008;
+        public static final int restartHomeButton=0x7f090009;
+        public static final int subtractionButton=0x7f09000d;
         public static final int timerDisplay=0x7f090005;
         public static final int userAnswer=0x7f090002;
-        public static final int welcomeText=0x7f090006;
-        public static final int welcomeText2=0x7f090007;
+        public static final int welcomeText=0x7f09000a;
+        public static final int welcomeText2=0x7f09000b;
     }
     public static final class layout {
         public static final int activity_display_ran=0x7f030000;
-        public static final int activity_main=0x7f030001;
+        public static final int activity_game_over_screen=0x7f030001;
+        public static final int activity_main=0x7f030002;
     }
     public static final class menu {
         public static final int display_ran=0x7f080000;
-        public static final int main=0x7f080001;
+        public static final int game_over_screen=0x7f080001;
+        public static final int main=0x7f080002;
     }
     public static final class string {
         public static final int action_settings=0x7f060001;
         public static final int appName=0x7f060000;
+        public static final int buttonGameOverHomeRestart=0x7f06000d;
+        public static final int buttonGameOverRestart=0x7f06000c;
         public static final int buttonStartAddition=0x7f060002;
         public static final int buttonStartDivision=0x7f060005;
         public static final int buttonStartMultiplication=0x7f060004;
         public static final int buttonStartSubtraction=0x7f060003;
         public static final int button_one=0x7f060006;
+        public static final int game_over=0x7f060009;
+        public static final int game_over_score=0x7f06000a;
         public static final int title_activity_display_ran=0x7f060007;
+        public static final int title_activity_game_over_screen=0x7f06000b;
         public static final int welcome_title=0x7f060008;
     }
     public static final class style {

@@ -22,14 +22,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
         <activity
             android:name="com.steve.mathlete.DisplayRan"
             android:label="@string/title_activity_display_ran"
             android:parentActivityName="com.steve.mathlete.MainActivity" >
             <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="com.steve.mathlete.MainActivity" /> 
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.steve.mathlete.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.steve.mathlete.GameOverScreen"
+            android:label="@string/title_activity_game_over_screen" >
         </activity>
     </application>
 

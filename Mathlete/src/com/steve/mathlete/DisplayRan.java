@@ -5,8 +5,10 @@ import java.util.Random;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
@@ -27,7 +29,8 @@ public class DisplayRan extends Activity {
 	int answerSet[] = null;
 	CharSequence firstText = "0";
 	CharSequence value = null; 
-	static int timerTime = 30;
+	static int timerTime = 15;
+	static String timerTimeString = null;
 	
 	@SuppressLint("NewApi")
 	@Override
@@ -52,7 +55,10 @@ public class DisplayRan extends Activity {
 		TextView numberCorrectView = (TextView) findViewById(R.id.numberCorrect);
 		numberCorrectView.setText("Correct:" + "0");
 		
+		
+		
 		run();
+		sync();
 //		final String numberToPass = number;
 		
 		mKeypadGrid = (GridView) findViewById(R.id.grdButtons);
@@ -83,6 +89,11 @@ public class DisplayRan extends Activity {
          
 	}
 	
+//	protected void onRestart() {
+//		timerTime = 15;
+//		run();
+//		sync();
+//	}
 	
 	 
 	@Override
@@ -93,19 +104,14 @@ public class DisplayRan extends Activity {
 	}
 	
 	public void run() {
+		
 		String operator = "0";
 		answerSet = ranSelect();
 		String number = "0";
-//		long timerInterval = 1000;
-//		final Runnable timer = new Runnable() {
-//			public void run() {
-//				timerTime -= 1;
-//				TextView timerView = (TextView) findViewById(R.id.timerDisplay);
-//				timerView.setText(timerTime);
-//			}
-//		};
-//
-//		Sync sync = new Sync(timer, timerInterval);
+		
+		
+		
+		
 		
 		
 		
@@ -144,15 +150,14 @@ public class DisplayRan extends Activity {
 	
 	
 	public void InputHandling(KeypadValue keypadValue) {
-//		double numberToCheck = Double.parseDouble(numbers);
+
 		
 		String text = keypadValue.getText().toString();
 		TextView userInputText = (TextView) findViewById(R.id.userAnswer);
 		String currentInput = userInputText.getText().toString();
 		
 		int inputLength = currentInput.length();
-//		String memoryArray[] = null;
-//		String answerCorrect = null;
+
 		
 		switch(keypadValue) {
 		case BCK:
@@ -196,14 +201,7 @@ public class DisplayRan extends Activity {
 		
 	
 	
-//	private void determineCorrect() {
-//		int input = Int.parseInt(currentInput);
-//		int answer = Int.parseInt(number);
-//		
-//		if(answer == input) {
-//			MainActivity.ranSelect();
-//		}
-//	}
+
 	
 public int[] ranSelect() {
 	 	
@@ -261,6 +259,7 @@ public void checkCorrect() {
 			numberCorrectView.setText("Correct:" + numberCorrect);
 			TextView userInputText = (TextView) findViewById(R.id.userAnswer);
 			userInputText.setText("");
+			timerTime += 1;
 	
 			} else {
 				Toast correctToast = Toast.makeText(getApplicationContext(), "correct answer is = " + answerSet[5], Toast.LENGTH_SHORT);
@@ -272,6 +271,52 @@ public void checkCorrect() {
 	return;
 	}
 	
+public void sync() {
 	
+	
+	
+	
+	final Handler timeHandler = new Handler();
+	final Runnable timer = new Runnable() {
+		@Override
+		public void run() {
+			if(timerTime >= 0)  {
+				try{
+				timerTime = timerTime - 1;
+				timerTimeString = "" + timerTime;
+				TextView timerView = (TextView) findViewById(R.id.timerDisplay);
+				timerView.setText(timerTimeString);
+	//			timeHandler.postDelayed(this, 1000);
+				}
+				catch(Exception e) {
+					
+				}
+				finally{
+					timeHandler.postDelayed(this, 1000);
+					
+				}
+			}
+			if(timerTime < 0) {
+				gameOver();
+				
+			}
+			
+		}
+	};
+	
+	if(timerTime >= 0) {
+	timeHandler.postDelayed(timer, 1000);
+	}
+	
+}
+
+public void gameOver(){
+	Intent gameOver = new Intent(this, GameOverScreen.class);
+	startActivity(gameOver);
+	
+}
+
 
 }
+
+
