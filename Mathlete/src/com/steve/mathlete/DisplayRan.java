@@ -238,6 +238,10 @@ public int[] ranSelect() {
         return numAnswer;
       
  }
+
+public void textViewClick() {
+	//handles textview click and changes to negative
+}
 	
 public void checkCorrect() {
 	int numCheck = 0;
