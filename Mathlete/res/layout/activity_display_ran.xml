@@ -26,6 +26,10 @@
     <TextView
         android:layout_below="@id/displayHere"
         android:id="@+id/userAnswer"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -33,7 +37,8 @@
         android:textSize="40sp"
         android:textStyle="bold"
         android:gravity="center"
-        android:textColor="@color/Red"
+        android:clickable="true"
+        android:onClick="textViewClick"
         />
     
     

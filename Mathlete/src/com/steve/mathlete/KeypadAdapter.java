@@ -10,6 +10,7 @@ import android.widget.Button;
 public class KeypadAdapter extends BaseAdapter {
 	public static String buttonTextColor;
 	private Context mContext;
+	private Context viewContext;
 	private OnClickListener mOnButtonClick;
 	
 	  public KeypadAdapter(Context c) {
@@ -41,9 +42,13 @@ public class KeypadAdapter extends BaseAdapter {
 	    KeypadValue keypadButton = mButtons[position];
 		btn.setOnClickListener(mOnButtonClick);
 		if(DisplayRan.numberCorrect < DisplayRan.answerChangeFlag[1]){
+//			btn.setTextColor(viewContext.getResources().getColor(R.color.Black));
+			
+			
 			btn.setBackgroundResource(R.drawable.keypadstyle1);
 		}
-		if(DisplayRan.numberCorrect == DisplayRan.answerChangeFlag[1]){
+		if(DisplayRan.numberCorrect >= DisplayRan.answerChangeFlag[1]){
+			btn.setTextColor(17170443);
 			btn.setBackgroundResource(R.drawable.keypadstyle2);
 		}
 	    // Set CalculatorButton enumeration as tag of the button so that we

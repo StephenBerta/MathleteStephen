@@ -5,7 +5,7 @@
     <item android:state_pressed="true" >
         <shape>
             <gradient
-                android:startColor="@color/Red"
+                android:startColor="@color/Black"
                 android:endColor="@color/Gray"
                 android:angle="270" />
             <stroke
@@ -14,10 +14,10 @@
             <corners
                 android:radius="2dp" />
             <padding
-                android:left="10dp"
-                android:top="10dp"
-                android:right="10dp"
-                android:bottom="10dp" />
+                android:left="15dp"
+                android:top="15dp"
+                android:right="15dp"
+                android:bottom="15dp" />
         </shape>
     </item>
 
@@ -44,7 +44,7 @@
         <shape>
             <stroke
                 android:width="5dp"
-                android:color="@color/Red" />
+                android:color="@color/Black" />
             <corners
                 android:radius="2dp" />
             <padding

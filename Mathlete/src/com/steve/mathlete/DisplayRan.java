@@ -36,8 +36,7 @@ public class DisplayRan extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
-		GridView mKeypadGrid;
-		KeypadAdapter mKeypadAdapter;
+		
 		
 		super.onCreate(savedInstanceState);
 		
@@ -48,37 +47,14 @@ public class DisplayRan extends Activity {
 		
 		
 		setContentView(R.layout.activity_display_ran);
-		//initialize a zero for user input
-		TextView userInputText = (TextView) findViewById(R.id.userAnswer);
-		userInputText.setText(firstText);
-		//initialize number correct
-		TextView numberCorrectView = (TextView) findViewById(R.id.numberCorrect);
-		numberCorrectView.setText("Correct:" + "0");
 		
 		
 		
-		run();
-		sync();
-//		final String numberToPass = number;
+		resetVariables();
 		
-		mKeypadGrid = (GridView) findViewById(R.id.grdButtons);
-		mKeypadAdapter = new KeypadAdapter(this);
-		mKeypadGrid.setAdapter(mKeypadAdapter);
+
 		
-		mKeypadAdapter.setOnButtonClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Button btn = (Button) v;
-				KeypadValue keypadValue = (KeypadValue) btn.getTag();
-				InputHandling(keypadValue);
-				
-				
-			}
-		});
 		
-		mKeypadGrid.setOnItemClickListener(new OnItemClickListener() {
-			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {	}
-		});
 		
 		
        
@@ -103,8 +79,61 @@ public class DisplayRan extends Activity {
 		return true;
 	}
 	
-	public void run() {
+	protected void onStart() {
+		super.onStart();
+		run();
+		sync();
+		resetVariables();
 		
+//		numberCorrectView.setText("Correct:" + numberCorrect);
+	}
+	
+	public void startKeypad() {
+		GridView mKeypadGrid;
+		KeypadAdapter mKeypadAdapter;
+		
+		mKeypadGrid = (GridView) findViewById(R.id.grdButtons);
+		mKeypadAdapter = new KeypadAdapter(this);
+		mKeypadGrid.setAdapter(mKeypadAdapter);
+		
+		mKeypadAdapter.setOnButtonClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Button btn = (Button) v;
+				KeypadValue keypadValue = (KeypadValue) btn.getTag();
+				InputHandling(keypadValue);
+				
+				
+			}
+		});
+		
+		mKeypadGrid.setOnItemClickListener(new OnItemClickListener() {
+			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {	}
+		});
+}
+	
+	public void resetVariables() {
+		numberCorrect = 0;
+		isFirst = true;
+		isCorrect = false;
+		CharSequence firstText = "0";
+		timerTime = 15;
+
+		//initialize a zero for user input
+		TextView userInputText = (TextView) findViewById(R.id.userAnswer);
+		userInputText.setText(firstText);
+		//initialize number correct
+		TextView numberCorrectView = (TextView) findViewById(R.id.numberCorrect);
+		numberCorrectView.setText("Correct:" + "0");
+				
+	}
+				
+
+	
+	public void run() {
+		if(numberCorrect == 0 || numberCorrect == answerChangeFlag[1]) {
+		startKeypad();
+		}
 		String operator = "0";
 		answerSet = ranSelect();
 		String number = "0";
@@ -207,16 +236,19 @@ public int[] ranSelect() {
 	 	
 	 	
     	Random rand = new Random();
-        Integer min = 0;
-        Integer max = 10;
-        
+        Integer min1 = 0;
+        Integer max1 = 10;
+        Integer min2 = 1;
+        Integer max2 = 12;
+        Integer min3 = 0;
+        Integer max3 = 15;
         int numAnswer[] = new int[10];
         
      
         
-        numAnswer[1] = rand.nextInt((max - min) + 1) + min;
-        numAnswer[2] = rand.nextInt((max - min) + 1) + min;
-        numAnswer[3] = rand.nextInt((max - min) + 1) + min;
+        numAnswer[1] = rand.nextInt((max1 - min1) + 1) + min1;
+        numAnswer[2] = rand.nextInt((max2 - min2) + 1) + min2;
+        numAnswer[3] = rand.nextInt((max3 - min3) + 1) + min3;
         
         //addition answer
         if(numberCorrect < answerChangeFlag[1]){
@@ -239,8 +271,27 @@ public int[] ranSelect() {
       
  }
 
-public void textViewClick() {
-	//handles textview click and changes to negative
+public void textViewClick(View view) {
+//handles textview click and changes to negative
+	int numCheck = 0;
+	
+	
+	
+	TextView userInputText = (TextView) findViewById(R.id.userAnswer);
+	String currentInput = userInputText.getText().toString();
+	
+	
+	
+	
+	numCheck = Integer.parseInt(currentInput.toString());
+	numCheck = numCheck * -1;
+	currentInput = "" + numCheck;
+	userInputText.setText(currentInput);
+	value = currentInput;
+	
+	
+	checkCorrect();
+	
 }
 	
 public void checkCorrect() {
@@ -266,12 +317,20 @@ public void checkCorrect() {
 			timerTime += 1;
 	
 			} else {
-				Toast correctToast = Toast.makeText(getApplicationContext(), "correct answer is = " + answerSet[5], Toast.LENGTH_SHORT);
-				correctToast.setGravity(Gravity.CENTER_HORIZONTAL, 0 ,0);
-				correctToast.show();
-				
+				if(MainActivity.isAddition){
+					Toast correctToast = Toast.makeText(getApplicationContext(), "correct answer is = " + answerSet[5], Toast.LENGTH_SHORT);
+					correctToast.setGravity(Gravity.CENTER_HORIZONTAL, 0 ,0);
+					correctToast.show();
+				}
+				if(MainActivity.isSubtraction){
+					Toast correctToast = Toast.makeText(getApplicationContext(), "correct answer is = " + answerSet[6], Toast.LENGTH_SHORT);
+					correctToast.setGravity(Gravity.CENTER_HORIZONTAL, 0 ,0);
+					correctToast.show();
+				}
 			}
 		}
+	
+	
 	return;
 	}
 	
@@ -308,8 +367,11 @@ public void sync() {
 		}
 	};
 	
-	if(timerTime >= 0) {
-	timeHandler.postDelayed(timer, 1000);
+	if(timerTime > 0) {
+		timeHandler.postDelayed(timer, 1000);
+	}
+	if(timerTime < 0) {
+		timeHandler.removeCallbacksAndMessages(null);
 	}
 	
 }
