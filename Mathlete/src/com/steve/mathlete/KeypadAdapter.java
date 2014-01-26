@@ -1,5 +1,6 @@
 package com.steve.mathlete;
 
+
 import android.content.Context;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -10,7 +11,7 @@ import android.widget.Button;
 public class KeypadAdapter extends BaseAdapter {
 	public static String buttonTextColor;
 	private Context mContext;
-	private Context viewContext;
+//	private Context viewContext;
 	private OnClickListener mOnButtonClick;
 	
 	  public KeypadAdapter(Context c) {

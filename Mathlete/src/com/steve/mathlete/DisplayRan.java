@@ -25,6 +25,7 @@ public class DisplayRan extends Activity {
 	public static int numberCorrect = 0;
 	boolean isFirst = true;
 	boolean isCorrect = false;
+	//increase the difficulty [0] is a place holder, [1] handles the third number, [2] handles keypad number delete
 	public static int answerChangeFlag[] = {0, 5, 10};
 	int answerSet[] = null;
 	CharSequence firstText = "0";
@@ -32,45 +33,27 @@ public class DisplayRan extends Activity {
 	static int timerTime = 15;
 	static String timerTimeString = null;
 	
+	
 	@SuppressLint("NewApi")
 	@Override
+	//create and initialize the main screen
 	protected void onCreate(Bundle savedInstanceState) {
-		
-		
-		
 		super.onCreate(savedInstanceState);
-		
 		//get intent
 		//Intent intent = getIntent();
-				
-		
-		
-		
-		setContentView(R.layout.activity_display_ran);
-		
-		
-		
-		resetVariables();
-		
 
-		
-		
-		
-		
-       
+		//initialize display
+		setContentView(R.layout.activity_display_ran);
+		//initialize the variables
+		resetVariables();
+
          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
              // Show the Up button in the action bar.
              getActionBar().setDisplayHomeAsUpEnabled(true);
-         }
-         
+         }  
 	}
 	
-//	protected void onRestart() {
-//		timerTime = 15;
-//		run();
-//		sync();
-//	}
-	
+
 	 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -79,15 +62,16 @@ public class DisplayRan extends Activity {
 		return true;
 	}
 	
+	
+	//when the app comes into the foreground
 	protected void onStart() {
 		super.onStart();
 		run();
 		sync();
 		resetVariables();
-		
-//		numberCorrectView.setText("Correct:" + numberCorrect);
 	}
 	
+	//initialize the keypad first and reinitialize on the answer flag (for difficulty)
 	public void startKeypad() {
 		GridView mKeypadGrid;
 		KeypadAdapter mKeypadAdapter;
@@ -112,6 +96,7 @@ public class DisplayRan extends Activity {
 		});
 }
 	
+	//initialize variables and manipulate for this game instance
 	public void resetVariables() {
 		numberCorrect = 0;
 		isFirst = true;
@@ -129,55 +114,52 @@ public class DisplayRan extends Activity {
 	}
 				
 
-	
+	//parent function that runs each time
 	public void run() {
 		if(numberCorrect == 0 || numberCorrect == answerChangeFlag[1]) {
-		startKeypad();
+			startKeypad();
 		}
 		String operator = "0";
 		answerSet = ranSelect();
 		String number = "0";
-		
-		
-		
-		
-		
-		
-		
+
 		if(MainActivity.isAddition) {
 			operator = "+";
 		}
 		if(MainActivity.isSubtraction) {
 			operator = "-";
 		}
-		if(MainActivity.isSubtraction && answerSet[2] > answerSet[1]) {
-			while(answerSet[2] > answerSet[1]) {
-				answerSet = ranSelect();
-			}
-			
+		if(MainActivity.isMultiplication) {
+			operator = "×";
 		}
+		
+		if(MainActivity.isDivision) {
+			operator = "÷";
+		}
+		
+//		if(MainActivity.isSubtraction && answerSet[2] > answerSet[1]) {
+//			while(answerSet[2] > answerSet[1]) {
+//				answerSet = ranSelect();
+//			}
+//			
+//		}
+		
 		if(numberCorrect < answerChangeFlag[1]) {
-			number = answerSet[1] + operator + answerSet[2];
+			number = answerSet[1] + " " + operator + " " + answerSet[2];
 		}
 		if(numberCorrect >= answerChangeFlag[1]) {
-			number = answerSet[1] + operator + answerSet[2] + operator + answerSet[3];
+			number = answerSet[1] + " " + operator + " " + answerSet[2] + " " + operator + " " + answerSet[3];
 		}
 		
 		
 		final TextView displayNumbers = (TextView) findViewById(R.id.displayHere);
         displayNumbers.setText(number);
-        
-        
-        
-       
-        	
-        	
-        	
+   	
 		return;
 		
 	}
 	
-	
+	//handle keypad inputs (does not include the click event for negatives)
 	public void InputHandling(KeypadValue keypadValue) {
 
 		
@@ -225,23 +207,39 @@ public class DisplayRan extends Activity {
 		return;
 	}
 
-		
-		
-		
-	
-	
-
-	
+//select our random numbers and find the answer to the questions
 public int[] ranSelect() {
-	 	
-	 	
+
     	Random rand = new Random();
+    	
         Integer min1 = 0;
         Integer max1 = 10;
         Integer min2 = 1;
         Integer max2 = 12;
         Integer min3 = 0;
         Integer max3 = 15;
+        
+        //set max/min values for multiplication
+        if(MainActivity.isMultiplication) {
+        	min1 = 0;
+            max1 = 10;
+            min2 = 1;
+            max2 = 8;
+            min3 = 0;
+            max3 = 5;
+        }
+    	
+        //set max/min values for division
+        if(MainActivity.isDivision) {
+        	min1 = 0;
+            max1 = 10;
+            min2 = 1;
+            max2 = 8;
+            min3 = 0;
+            max3 = 5;
+        }
+    	
+    	
         int numAnswer[] = new int[10];
         
      
@@ -251,38 +249,52 @@ public int[] ranSelect() {
         numAnswer[3] = rand.nextInt((max3 - min3) + 1) + min3;
         
         //addition answer
-        if(numberCorrect < answerChangeFlag[1]){
-        numAnswer[5] = numAnswer[1] + numAnswer[2];
+        if(MainActivity.isAddition) {
+	        if(numberCorrect < answerChangeFlag[1]){
+	        numAnswer[10] = numAnswer[1] + numAnswer[2];
+	        }
+	        if(numberCorrect >= answerChangeFlag[1]){
+	        numAnswer[10] = numAnswer[1] + numAnswer[2] + numAnswer[3];
+	        }
         }
-        if(numberCorrect >= answerChangeFlag[1]){
-        numAnswer[5] = numAnswer[1] + numAnswer[2] + numAnswer[3];
-        }
+        
         //subtraction answer
-        if(numberCorrect < answerChangeFlag[1]) {
-        numAnswer[6] = numAnswer[1] - numAnswer[2];
+        if(MainActivity.isSubtraction) {
+	        if(numberCorrect < answerChangeFlag[1]) {
+	        numAnswer[10] = numAnswer[1] - numAnswer[2];
+	        }
+	        if(numberCorrect >= answerChangeFlag[1]) {
+	        numAnswer[10] = numAnswer[1] - numAnswer[2] - numAnswer[3];
+	        }
         }
-        if(numberCorrect >= answerChangeFlag[1]) {
-        numAnswer[6] = numAnswer[1] - numAnswer[2] - numAnswer[3];
-            }
         //multiplication answer
+        if(MainActivity.isMultiplication) {
+	        if(numberCorrect < answerChangeFlag[1]) {
+	        numAnswer[10] = numAnswer[1] * numAnswer[2];
+	        }
+	        if(numberCorrect >= answerChangeFlag[1]) {
+	        numAnswer[10] = numAnswer[1] * numAnswer[2] * numAnswer[3];
+	        }
+        }
         //division answer
-
+        if(MainActivity.isDivision) {
+	        if(numberCorrect < answerChangeFlag[1]) {
+	        numAnswer[10] = numAnswer[1] * numAnswer[2];
+	        }
+	        if(numberCorrect >= answerChangeFlag[1]) {
+	        numAnswer[10] = numAnswer[1] * numAnswer[2] * numAnswer[3];
+	        }
+        }
         return numAnswer;
       
  }
 
-public void textViewClick(View view) {
 //handles textview click and changes to negative
+public void textViewClick(View view) {
 	int numCheck = 0;
-	
-	
 	
 	TextView userInputText = (TextView) findViewById(R.id.userAnswer);
 	String currentInput = userInputText.getText().toString();
-	
-	
-	
-	
 	numCheck = Integer.parseInt(currentInput.toString());
 	numCheck = numCheck * -1;
 	currentInput = "" + numCheck;
@@ -301,15 +313,17 @@ public void checkCorrect() {
 		numCheck = Integer.parseInt(value.toString());
 		
 		
-		if(MainActivity.isAddition && answerSet[5] == numCheck || MainActivity.isSubtraction && answerSet[6] == numCheck) {
+		if(answerSet[10] == numCheck) {
+			//do i need this?? below
 			isCorrect = true;
 			
 			Toast correctToast = Toast.makeText(getApplicationContext(), "correct", Toast.LENGTH_SHORT);
 			correctToast.setGravity(Gravity.CENTER_HORIZONTAL, 0 ,0);
 			correctToast.show();
 			numberCorrect += 1;
+			//run main again
 			run();
-			//initialize number correct
+			//change number correct
 			TextView numberCorrectView = (TextView) findViewById(R.id.numberCorrect);
 			numberCorrectView.setText("Correct:" + numberCorrect);
 			TextView userInputText = (TextView) findViewById(R.id.userAnswer);
@@ -317,16 +331,9 @@ public void checkCorrect() {
 			timerTime += 1;
 	
 			} else {
-				if(MainActivity.isAddition){
-					Toast correctToast = Toast.makeText(getApplicationContext(), "correct answer is = " + answerSet[5], Toast.LENGTH_SHORT);
-					correctToast.setGravity(Gravity.CENTER_HORIZONTAL, 0 ,0);
-					correctToast.show();
-				}
-				if(MainActivity.isSubtraction){
-					Toast correctToast = Toast.makeText(getApplicationContext(), "correct answer is = " + answerSet[6], Toast.LENGTH_SHORT);
-					correctToast.setGravity(Gravity.CENTER_HORIZONTAL, 0 ,0);
-					correctToast.show();
-				}
+				Toast correctToast = Toast.makeText(getApplicationContext(), "correct answer is = " + answerSet[5], Toast.LENGTH_SHORT);
+				correctToast.setGravity(Gravity.CENTER_HORIZONTAL, 0 ,0);
+				correctToast.show();
 			}
 		}
 	
@@ -334,16 +341,14 @@ public void checkCorrect() {
 	return;
 	}
 	
+//runs the handlers
 public void sync() {
-	
-	
-	
 	
 	final Handler timeHandler = new Handler();
 	final Runnable timer = new Runnable() {
 		@Override
 		public void run() {
-			if(timerTime >= 0)  {
+			if(timerTime > 0)  {
 				try{
 				timerTime = timerTime - 1;
 				timerTimeString = "" + timerTime;
@@ -376,6 +381,7 @@ public void sync() {
 	
 }
 
+//change screens
 public void gameOver(){
 	Intent gameOver = new Intent(this, GameOverScreen.class);
 	startActivity(gameOver);

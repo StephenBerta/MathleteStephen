@@ -171,13 +171,15 @@ public final class R {
         public static final int keypadstyle2=0x7f020003;
     }
     public static final class id {
-        public static final int action_settings=0x7f09000e;
+        public static final int action_settings=0x7f090010;
         public static final int additionButton=0x7f09000c;
         public static final int displayHere=0x7f090001;
         public static final int displayScreen=0x7f090000;
+        public static final int dvisionButton=0x7f09000f;
         public static final int gameOverScoreView=0x7f090007;
         public static final int gameOverView=0x7f090006;
         public static final int grdButtons=0x7f090003;
+        public static final int multiplicationButton=0x7f09000e;
         public static final int numberCorrect=0x7f090004;
         public static final int restartButton=0x7f090008;
         public static final int restartHomeButton=0x7f090009;

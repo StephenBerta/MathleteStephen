@@ -7,7 +7,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity"
-    android:background="@color/BlackOverlay" 
+    android:background="@color/Snow" 
     android:orientation="vertical">
     
     
@@ -39,30 +39,51 @@
 
 	    <Button
 	        android:id="@+id/additionButton"
-	        android:layout_marginLeft="10dp"
-	        android:layout_marginRight="10dp"
-	        android:layout_width="match_parent"
+	        android:layout_width="250dp"
 	        android:layout_height="wrap_content"
-	        android:layout_alignParentLeft="true"
-	        android:layout_below="@+id/welcomeText"
-	        android:layout_marginTop="25dp"
+	        android:layout_below="@+id/welcomeText2"
+	        android:layout_centerHorizontal="true"
+	        android:layout_marginTop="12dp"
 	        android:gravity="center"
 	        android:onClick="runAddition"
-	        android:text="@string/buttonStartAddition" 
-	       />
-	    
+	        android:text="@string/buttonStartAddition"
+	        android:background="@drawable/buttonstylefrontpage" />
+
 	    <Button
 	        android:id="@+id/subtractionButton"
-	        android:layout_marginLeft="10dp"
-	        android:layout_marginRight="10dp"
-	        android:layout_width="match_parent"
+	        android:layout_width="250dp"
 	        android:layout_height="wrap_content"
-	        android:layout_alignParentLeft="true"
+	        android:layout_alignLeft="@+id/additionButton"
 	        android:layout_below="@+id/additionButton"
-	        android:layout_marginTop="25dp"
+	        android:layout_marginTop="20dp"
 	        android:gravity="center"
 	        android:onClick="runSubtraction"
-	        android:text="@string/buttonStartSubtraction" />
+	        android:text="@string/buttonStartSubtraction"
+	        android:background="@drawable/buttonstylefrontpage" />
+
+	    <Button
+	        android:id="@+id/multiplicationButton"
+	        android:layout_width="250dp"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/subtractionButton"
+	        android:layout_below="@+id/subtractionButton"
+	        android:layout_marginTop="20dp"
+	        android:gravity="center"
+	        android:onClick="runMultiplication"
+	        android:text="@string/buttonStartMultiplication"
+	        android:background="@drawable/buttonstylefrontpage" />
+	    
+	     <Button
+	        android:id="@+id/dvisionButton"
+	        android:layout_width="250dp"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/multiplicationButton"
+	        android:layout_below="@+id/multiplicationButton"
+	        android:layout_marginTop="20dp"
+	        android:gravity="center"
+	        android:onClick="runDivision"
+	        android:text="@string/buttonStartDivision"
+	        android:background="@drawable/buttonstylefrontpage" />
 	    
 	    </RelativeLayout>
    

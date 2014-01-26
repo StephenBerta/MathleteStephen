@@ -24,12 +24,12 @@
     <item android:state_focused="true" >
         <shape>
             <gradient
-                android:startColor="@color/White"
+                android:startColor="@color/BlackOverlay"
                 android:endColor="@color/BlackOverlay"
                 android:angle="270" />
             <stroke
                 android:width="2dp"
-                android:color="@color/White" />
+                android:color="@color/BlackOverlay" />
             <corners
                 android:radius="2dp" />
             <padding
@@ -40,14 +40,19 @@
         </shape>
     </item>
 
-    <item>        
+    <item>   
         <shape>
+            <gradient
+                android:startColor="@color/BlackOverlay"
+                android:endColor="@color/BlackOverlay"
+                android:angle="270" />
             <stroke
                 android:width="5dp"
                 android:color="@color/Black" />
             <corners
                 android:radius="2dp" />
             <padding
+                android:background="@color/BlackOverlay"
                 android:left="10dp"
                 android:top="10dp"
                 android:right="10dp"
