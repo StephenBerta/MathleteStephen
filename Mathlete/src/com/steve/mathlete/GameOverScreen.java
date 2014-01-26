@@ -14,11 +14,15 @@ public class GameOverScreen extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game_over_screen);
 		
+		
+	}
+
+	protected void onStart() {
+		super.onStart();
+		
 		TextView timerView = (TextView) findViewById(R.id.gameOverScoreView);
 		timerView.setText("Score = " + DisplayRan.numberCorrect);
 	}
-
-	
 	
 	public void runRestart(View view){
     	Intent runRestart = new Intent(this, DisplayRan.class);

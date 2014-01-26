@@ -48,7 +48,7 @@ public class KeypadAdapter extends BaseAdapter {
 			
 			btn.setBackgroundResource(R.drawable.keypadstyle1);
 		}
-		if(DisplayRan.numberCorrect >= DisplayRan.answerChangeFlag[1]){
+		if(DisplayRan.numberCorrect >= DisplayRan.answerChangeFlag[2]){
 			btn.setTextColor(17170443);
 			btn.setBackgroundResource(R.drawable.keypadstyle2);
 		}

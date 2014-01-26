@@ -21,26 +21,38 @@
         android:text="@string/game_over_score"
         android:textColor="@color/Green"
         android:textSize="40sp" />
-    
-    <Button
-	        android:id="@+id/restartButton"
-	        android:layout_marginLeft="10dp"
-	        android:layout_marginRight="10dp"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:layout_marginTop="25dp"
-	        android:gravity="center"
-	        android:onClick="runRestart"
-	        android:text="@string/buttonGameOverRestart" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
      <Button
-	        android:id="@+id/restartHomeButton"
-	        android:layout_marginLeft="10dp"
-	        android:layout_marginRight="10dp"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:layout_marginTop="25dp"
-	        android:gravity="center"
-	        android:onClick="runHomeRestart"
-	        android:text="@string/buttonGameOverHomeRestart" />
+         android:id="@+id/restartButton"
+         android:layout_width="200dp"
+         android:layout_height="wrap_content"
+         android:layout_alignParentTop="true"
+         android:layout_centerHorizontal="true"
+         android:layout_marginTop="20dp"
+         android:background="@drawable/buttonstylegameoverpage"
+         android:gravity="center"
+         android:onClick="runRestart"
+         android:textSize="30sp"
+         android:text="@string/buttonGameOverRestart" />
+
+     <Button
+         android:id="@+id/restartHomeButton"
+         android:layout_width="200dp"
+         android:layout_height="wrap_content"
+         android:layout_alignLeft="@+id/restartButton"
+         android:layout_below="@+id/restartButton"
+         android:layout_marginTop="20dp"
+         android:background="@drawable/buttonstylegameoverpage"
+         android:gravity="center"
+         android:onClick="runHomeRestart"
+         android:textSize="30sp"
+         android:text="@string/buttonGameOverHomeRestart" />
+
+     </RelativeLayout>
 
 </LinearLayout>

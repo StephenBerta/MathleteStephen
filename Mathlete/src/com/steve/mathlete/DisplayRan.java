@@ -39,8 +39,6 @@ public class DisplayRan extends Activity {
 	//create and initialize the main screen
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//get intent
-		//Intent intent = getIntent();
 
 		//initialize display
 		setContentView(R.layout.activity_display_ran);
@@ -116,11 +114,31 @@ public class DisplayRan extends Activity {
 
 	//parent function that runs each time
 	public void run() {
-		if(numberCorrect == 0 || numberCorrect == answerChangeFlag[1]) {
+		if(numberCorrect == 0 || numberCorrect == answerChangeFlag[2]) {
 			startKeypad();
 		}
+		
 		String operator = "0";
 		answerSet = ranSelect();
+		
+		while(MainActivity.isDivision && answerSet[1] % answerSet[2] != 0) {
+			
+			answerSet = ranSelect();
+			
+//			if(numberCorrect >= answerChangeFlag[1]){
+//				while((answerSet[1] / answerSet[2]) % answerSet[3] != 0) {
+//					answerSet = ranSelect();
+//				}
+//			}
+		}
+		
+//		if(numberCorrect >= answerChangeFlag[1]){
+//			int checkForModulus = (answerSet[1] % answerSet[2]);
+//			
+//			while(MainActivity.isDivision && (answerSet[1] % answerSet[2]) % answerSet[3] != 0) {
+//				answerSet = ranSelect();
+//			}
+//		}
 		String number = "0";
 
 		if(MainActivity.isAddition) {
@@ -144,10 +162,10 @@ public class DisplayRan extends Activity {
 //			
 //		}
 		
-		if(numberCorrect < answerChangeFlag[1]) {
+		if(numberCorrect < answerChangeFlag[1] || MainActivity.isDivision) {
 			number = answerSet[1] + " " + operator + " " + answerSet[2];
 		}
-		if(numberCorrect >= answerChangeFlag[1]) {
+		if(numberCorrect >= answerChangeFlag[1] && !MainActivity.isDivision) {
 			number = answerSet[1] + " " + operator + " " + answerSet[2] + " " + operator + " " + answerSet[3];
 		}
 		
@@ -219,7 +237,7 @@ public int[] ranSelect() {
         Integer min3 = 0;
         Integer max3 = 15;
         
-        //set max/min values for multiplication
+//        set max/min values for multiplication
         if(MainActivity.isMultiplication) {
         	min1 = 0;
             max1 = 10;
@@ -231,22 +249,23 @@ public int[] ranSelect() {
     	
         //set max/min values for division
         if(MainActivity.isDivision) {
-        	min1 = 0;
-            max1 = 10;
+        	min1 = 1;
+            max1 = 30;
             min2 = 1;
-            max2 = 8;
-            min3 = 0;
-            max3 = 5;
+            max2 = 15;
+            min3 = 1;
+            max3 = 3;
         }
     	
     	
-        int numAnswer[] = new int[10];
+        int numAnswer[] = new int[11];
         
      
         
         numAnswer[1] = rand.nextInt((max1 - min1) + 1) + min1;
         numAnswer[2] = rand.nextInt((max2 - min2) + 1) + min2;
         numAnswer[3] = rand.nextInt((max3 - min3) + 1) + min3;
+        
         
         //addition answer
         if(MainActivity.isAddition) {
@@ -277,13 +296,13 @@ public int[] ranSelect() {
 	        }
         }
         //division answer
-        if(MainActivity.isDivision) {
-	        if(numberCorrect < answerChangeFlag[1]) {
-	        numAnswer[10] = numAnswer[1] * numAnswer[2];
-	        }
-	        if(numberCorrect >= answerChangeFlag[1]) {
-	        numAnswer[10] = numAnswer[1] * numAnswer[2] * numAnswer[3];
-	        }
+        if(MainActivity.isDivision) {	
+			if(numberCorrect < answerChangeFlag[1]) {
+				numAnswer[10] = numAnswer[1] / numAnswer[2];     	
+			}	
+		    if(numberCorrect >= answerChangeFlag[1]) {
+		    	numAnswer[10] = numAnswer[1] / numAnswer[2];
+		    }
         }
         return numAnswer;
       
@@ -331,7 +350,7 @@ public void checkCorrect() {
 			timerTime += 1;
 	
 			} else {
-				Toast correctToast = Toast.makeText(getApplicationContext(), "correct answer is = " + answerSet[5], Toast.LENGTH_SHORT);
+				Toast correctToast = Toast.makeText(getApplicationContext(), "correct answer is = " + answerSet[10], Toast.LENGTH_SHORT);
 				correctToast.setGravity(Gravity.CENTER_HORIZONTAL, 0 ,0);
 				correctToast.show();
 			}
@@ -354,17 +373,18 @@ public void sync() {
 				timerTimeString = "" + timerTime;
 				TextView timerView = (TextView) findViewById(R.id.timerDisplay);
 				timerView.setText(timerTimeString);
-	//			timeHandler.postDelayed(this, 1000);
+//				timeHandler.postDelayed(this, 1000);
 				}
 				catch(Exception e) {
 					
 				}
 				finally{
-					timeHandler.postDelayed(this, 1000);
-					
+					if(timerTime > 0) {
+						timeHandler.postDelayed(this, 1000);
+					}
 				}
 			}
-			if(timerTime < 0) {
+			if(timerTime == 0) {
 				gameOver();
 				
 			}
@@ -372,10 +392,10 @@ public void sync() {
 		}
 	};
 	
-	if(timerTime > 0) {
+	if(timerTime > 1) {
 		timeHandler.postDelayed(timer, 1000);
 	}
-	if(timerTime < 0) {
+	if(timerTime == 0) {
 		timeHandler.removeCallbacksAndMessages(null);
 	}
 	
