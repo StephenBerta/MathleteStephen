@@ -4,10 +4,12 @@ package com.steve.mathlete;
 
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 
@@ -20,10 +22,15 @@ public class MainActivity extends Activity {
 	
 
 	
-    @Override
+    @SuppressLint("NewApi")
+	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+//        ActionBar actionBar = getActionBar();
+//        actionBar.setDisplayHomeAsUpEnabled(true);
+        
         
     }
     
@@ -73,6 +80,22 @@ public class MainActivity extends Activity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.menuSettings:
+                
+                return true;
+                
+            case R.id.actionSettings:
+                
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
     
 }

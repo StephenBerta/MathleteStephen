@@ -22,16 +22,22 @@ import android.widget.Toast;
 
 
 public class DisplayRan extends Activity {
+	static int timerTime = 15;
+	int answerSet[] = null;
 	public static int numberCorrect = 0;
-	boolean isFirst = true;
-	boolean isCorrect = false;
 	//increase the difficulty [0] is a place holder, [1] handles the third number, [2] handles keypad number delete
 	public static int answerChangeFlag[] = {0, 5, 10};
-	int answerSet[] = null;
+	
+	boolean isFirst = true;
+	boolean isCorrect = false;
+	boolean isPaused = false;
+	
+	static String timerTimeString = null;
+	
 	CharSequence firstText = "0";
 	CharSequence value = null; 
-	static int timerTime = 15;
-	static String timerTimeString = null;
+	
+	
 	
 	
 	@SuppressLint("NewApi")
@@ -68,6 +74,29 @@ public class DisplayRan extends Activity {
 		sync();
 		resetVariables();
 	}
+	
+	protected void onRestart() {
+		super.onRestart();
+	}
+	
+	protected void onResume() {
+		super.onResume();
+	}
+	
+	protected void onPaused() {
+		super.onPause();
+		isPaused = true;
+	}
+	
+	protected void onStop() {
+		super.onStop();
+		isPaused = true;
+	}
+	
+	protected void onDestroy() {
+		super.onDestroy();
+	}
+	
 	
 	//initialize the keypad first and reinitialize on the answer flag (for difficulty)
 	public void startKeypad() {
@@ -108,6 +137,8 @@ public class DisplayRan extends Activity {
 		//initialize number correct
 		TextView numberCorrectView = (TextView) findViewById(R.id.numberCorrect);
 		numberCorrectView.setText("Correct:" + "0");
+		
+		isPaused = false;
 				
 	}
 				
@@ -122,14 +153,7 @@ public class DisplayRan extends Activity {
 		answerSet = ranSelect();
 		
 		while(MainActivity.isDivision && answerSet[1] % answerSet[2] != 0) {
-			
 			answerSet = ranSelect();
-			
-//			if(numberCorrect >= answerChangeFlag[1]){
-//				while((answerSet[1] / answerSet[2]) % answerSet[3] != 0) {
-//					answerSet = ranSelect();
-//				}
-//			}
 		}
 		
 //		if(numberCorrect >= answerChangeFlag[1]){
@@ -367,7 +391,7 @@ public void sync() {
 	final Runnable timer = new Runnable() {
 		@Override
 		public void run() {
-			if(timerTime > 0)  {
+			if(timerTime > 0 && !isPaused)  {
 				try{
 				timerTime = timerTime - 1;
 				timerTimeString = "" + timerTime;
@@ -384,7 +408,7 @@ public void sync() {
 					}
 				}
 			}
-			if(timerTime == 0) {
+			if(timerTime == 0 && !isPaused) {
 				gameOver();
 				
 			}
@@ -403,9 +427,10 @@ public void sync() {
 
 //change screens
 public void gameOver(){
+	if(!isPaused) {
 	Intent gameOver = new Intent(this, GameOverScreen.class);
 	startActivity(gameOver);
-	
+	}
 }
 
 
