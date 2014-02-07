@@ -19,6 +19,8 @@ public class MainActivity extends Activity {
 	static boolean isSubtraction = false;
 	static boolean isMultiplication = false;
 	static boolean isDivision = false;
+	static boolean isNumberOne = false;
+	static boolean isDebug = false;
 	
 
 	
@@ -42,6 +44,7 @@ public class MainActivity extends Activity {
     	isSubtraction = false;
     	isMultiplication = false;
     	isDivision = false;
+    	isNumberOne = false;
     }
     
     public void runSubtraction(View view){
@@ -51,6 +54,7 @@ public class MainActivity extends Activity {
     	isSubtraction = true;
     	isMultiplication = false;
     	isDivision = false;
+    	isNumberOne = false;
     }
     
     public void runMultiplication(View view){
@@ -60,6 +64,7 @@ public class MainActivity extends Activity {
     	isSubtraction = false;
     	isMultiplication = true;
     	isDivision = false;
+    	isNumberOne = false;
     }
     
     public void runDivision(View view){
@@ -69,8 +74,18 @@ public class MainActivity extends Activity {
     	isSubtraction = false;
     	isMultiplication = false;
     	isDivision = true;
+    	isNumberOne = false;
     }
     
+    public void runNumberOne(View view){
+    	Intent startNumberOne = new Intent(this, DisplayRan.class);
+    	startActivity(startNumberOne);
+    	isAddition = false;
+    	isSubtraction = false;
+    	isMultiplication = false;
+    	isDivision = false;
+    	isNumberOne = true;
+    }
          
     
 

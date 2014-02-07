@@ -34,6 +34,10 @@
             android:name="com.steve.mathlete.GameOverScreen"
             android:label="@string/title_activity_game_over_screen" >
         </activity>
+        <activity
+            android:name="com.steve.mathlete.NumberOne"
+            android:label="@string/title_activity_number_one" >
+        </activity>
     </application>
 
 </manifest>

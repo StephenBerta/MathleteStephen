@@ -198,11 +198,13 @@ public final class R {
         public static final int activity_display_ran=0x7f030000;
         public static final int activity_game_over_screen=0x7f030001;
         public static final int activity_main=0x7f030002;
+        public static final int activity_number_one=0x7f030003;
     }
     public static final class menu {
         public static final int display_ran=0x7f080000;
         public static final int game_over_screen=0x7f080001;
         public static final int main=0x7f080002;
+        public static final int number_one=0x7f080003;
     }
     public static final class string {
         public static final int action_settings=0x7f060001;
@@ -217,9 +219,11 @@ public final class R {
         public static final int button_one=0x7f060008;
         public static final int game_over=0x7f06000b;
         public static final int game_over_score=0x7f06000c;
+        public static final int hello_world=0x7f060011;
         public static final int menuSettings=0x7f060002;
         public static final int title_activity_display_ran=0x7f060009;
         public static final int title_activity_game_over_screen=0x7f06000d;
+        public static final int title_activity_number_one=0x7f060010;
         public static final int welcome_title=0x7f06000a;
     }
     public static final class style {
