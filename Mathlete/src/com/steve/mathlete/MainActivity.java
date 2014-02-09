@@ -20,7 +20,7 @@ public class MainActivity extends Activity {
 	static boolean isMultiplication = false;
 	static boolean isDivision = false;
 	static boolean isNumberOne = false;
-	static boolean isDebug = false;
+	static boolean isDebug = true;
 	
 
 	
